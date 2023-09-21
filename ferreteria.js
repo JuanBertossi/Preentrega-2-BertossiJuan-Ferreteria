@@ -59,31 +59,32 @@ function enCarrito(nombrePrompt) {
 }
 
 function buscarCarrito() {
-  const keyword = prompt("¿Qué producto desea buscar?");
+  const keyword = prompt("¿Qué producto quiere buscar?");
   const arrayResultados = carrito.filter((el) =>
-    el.nombre.toLowerCase().includes(keyword.toLowerCase())
+    el.nombre.includes(keyword)
   );
   console.log(arrayResultados);
 }
 
 function agregar() {
-  const nombrePrompt = prompt("Introduzca el nombre del producto:");
-  const productoEncontrado = enCarrito(nombrePrompt);
-
-  if (productoEncontrado) {
-    productoEncontrado.cantidad++;
-    productoEncontrado.precio = productoEncontrado.precio;
-    productoEncontrado.subtotal =
-      productoEncontrado.precio * productoEncontrado.cantidad;
-  } else {
+    const nombrePrompt = prompt("Ingrese el nombre del producto: ");
+    const precioPrompt = prompt("Ingrese el precio del producto elegido: ")
     const nuevoProducto = {
       nombre: nombrePrompt,
-      precio: productoEncontrado.precio,
-      subtotal: productoEncontrado.subtotal,
+      precio: parseInt(precioPrompt),
+      subtotal: parseInt(precioPrompt),
       cantidad: 1,
     };
-    carrito.push(nuevoProducto);
-  }
+  
+    const productoEncontrado = enCarrito(nombrePrompt);
+  
+    if (productoEncontrado) {
+      productoEncontrado.cantidad++;
+      productoEncontrado.precio = parseInt(precioPrompt);
+      productoEncontrado.subtotal = parseInt(precioPrompt) * productoEncontrado.cantidad;
+    } else {
+      carrito.push(nuevoProducto);
+    }
 
   alert("El producto " + nombrePrompt + " fue agregado al carrito.");
   listarProductos();
